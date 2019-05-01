@@ -3,21 +3,11 @@
 main file
 """
 import sys
-from cv2 import imread
+import os
+import numpy as np
 from config import ROLL
 from conf import USAGE_MESSAGE
-
-def touch_file(filename="{}.txt".format(ROLL)):
-    """
-    Touches output file
-    """
-    with open(filename, "w+") as _out: pass
-
-def imread_c(image=""):
-    """
-    Read image
-    """
-    return imread(image)
+from utils import imread_c, touch_file
 
 if __name__ == "__main__":
     touch_file()
@@ -26,7 +16,9 @@ if __name__ == "__main__":
         print(USAGE_MESSAGE.format(ROLL))
         exit(-1)
 
-    path_slides = sys.argv[1]
-    path_frames = sys.argv[2]
+    PATH_SLIDES = sys.argv[1]
+    PATH_FRAMES = sys.argv[2]
 
-    print(f"{sys.argv[0]} {path_slides} {path_frames}")
+    IMAGE = imread_c(os.path.join("Data", "Dataset", "02_0", "0.jpg"))
+
+    print(f"{sys.argv[0]} {PATH_SLIDES} {PATH_FRAMES}")
