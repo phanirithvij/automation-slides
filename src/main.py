@@ -4,6 +4,7 @@ main file
 """
 import sys
 import os
+import glob
 import numpy as np
 from config import ROLL
 from conf import USAGE_MESSAGE
@@ -18,6 +19,8 @@ if __name__ == "__main__":
 
     PATH_SLIDES = sys.argv[1]
     PATH_FRAMES = sys.argv[2]
+
+    print(glob.glob(PATH_FRAMES))
 
     IMAGE = imread_c(os.path.join("Data", "Dataset", "02_0", "0.jpg"))
 
