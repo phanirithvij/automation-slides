@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python3
 from config import ROLL
 import sys
 from conf import USAGE_MESSAGE
