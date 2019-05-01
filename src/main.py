@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 from config import ROLL
 import sys
+from conf import USAGE_MESSAGE
 
 def touch_file(filename="{}.txt".format(ROLL)):
     """
@@ -12,7 +13,7 @@ if __name__ == "__main__":
     touch_file()
 
     if len(sys.argv) < 3:
-        print("Wrong usage")
+        print(USAGE_MESSAGE.format(ROLL))
         exit(-1)
 
     path_slides = sys.argv[1]
