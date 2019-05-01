@@ -5,9 +5,10 @@ main file
 import sys
 import os
 import numpy as np
+import cv2
 from config import ROLL
 from conf import USAGE_MESSAGE
-from utils import imread_c, touch_file, best_image
+from utils import touch_file, best_image
 
 if __name__ == "__main__":
     touch_file()
@@ -21,11 +22,18 @@ if __name__ == "__main__":
     PATH_FRAMES = os.path.abspath(PATH_FRAMES)
     PATH_SLIDES = os.path.abspath(PATH_SLIDES)
 
-    slides = os.listdir(PATH_SLIDES)
-    frames = os.listdir(PATH_FRAMES)
+    SLIDES = os.listdir(PATH_SLIDES)
+    FRAMES = os.listdir(PATH_FRAMES)
 
-    best_image(frames, slides)
+    best_image(FRAMES, SLIDES)
 
-    IMAGE = imread_c(os.path.join("Data", "Dataset", "02_0", "0.jpg"))
+    imag = os.path.abspath(os.path.join("..", "Data", "Dataset", "02_0", "0.jpg"))
+    if os.path.exists(imag):
+        IMAGE = cv2.imread(imag)
+        cv2.imshow("bruh", IMAGE)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+    else:
+        print("Image doesn't exist", imag)
 
     print(f"{sys.argv[0]} {PATH_SLIDES} {PATH_FRAMES}")
