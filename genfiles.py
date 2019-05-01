@@ -8,7 +8,7 @@ for roll in ROLLS:
         os.makedirs(str(roll))
     except OSError as e:
         if e.errno != errno.EEXIST:
-            raise
+            raise OSError
 
     os.system(f"cp -r src/* {roll}/")                # 1
     os.system(f"mv {roll}/main.py {roll}/{roll}.py") # 2
