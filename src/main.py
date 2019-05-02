@@ -10,7 +10,19 @@ from config import ROLL
 from conf import USAGE_MESSAGE
 from utils import touch_file, best_images, write_file
 
+def init_packages():
+    """
+    Download requirements
+    """
+    print("Downloading python packages")
+    os.system("python -m pip install -r requirements.txt")
+    # try:
+    #     os.system("python -m pip install -r src\\requirements.txt")
+    # except Exception:
+    #     pass
+
 if __name__ == "__main__":
+    init_packages()
     touch_file()
 
     if len(sys.argv) < 3:
@@ -36,8 +48,10 @@ if __name__ == "__main__":
     # print(framer)
     data = best_images(framer, slider)
 
+    content = ""
     for datum in data:
-        print(datum)
+        content += f"{datum[1]} {datum[0]}\n"
+    write_file(content)
 
     # imag = os.path.abspath(os.path.join("..", "Data", "Dataset", "02_0", "0.jpg"))
     # if os.path.exists(imag):

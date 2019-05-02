@@ -1,10 +1,10 @@
 """
 Util functions
 """
-import os
+# import os
 import time
 import cv2
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
 from config import ROLL
 
 
@@ -55,17 +55,22 @@ def best_images(frames, slides) -> list:
     start = time.time()
     frs = [imread(im) for im in frames]
     slds = [imread(im) for im in slides]
-    print("Took", time.time() - start, "secs")
+    print("Took", time.time() - start, "secs to read images")
 
     # frs = [cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) for img in frames]
     # slds = [cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) for img in slides]
 
+    prev_t = time.time()
     for f_r in frs:
         keypoints, descriptors = sift.detectAndCompute(f_r, None)
         keyframes.append((keypoints, descriptors))
+        print("Took", time.time() - prev_t, "secs to read")
+        prev_t = time.time()
     for s_l in slds:
         keypoints, descriptors = sift.detectAndCompute(s_l, None)
         keyslides.append((keypoints, descriptors))
+        print("Took", time.time() - prev_t, "secs to read")
+        prev_t = time.time()
 
     for idx, frame in enumerate(frames):
         max_percent = 0
@@ -77,7 +82,7 @@ def best_images(frames, slides) -> list:
             kp2, ds2 = keyslides[jdx]
 
             matches = flann.knnMatch(ds1, ds2, k=2)
-            # print(matches)
+            print("matches++")
 
             good_points = []
             for x_snake in matches:
