@@ -1,5 +1,10 @@
 """
 Util functions
+
+1. Accuracy measuring
+2. Sift is good_points == 0
+3. Get wrong outputs and make a seperate dataset
+4. Make a report
 """
 # import os
 import time
