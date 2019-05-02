@@ -1,7 +1,7 @@
 """
 Util functions
 """
-from cv2 import imread
+import cv2
 from config import ROLL
 
 def touch_file(filename="{}.txt".format(ROLL)):
@@ -11,19 +11,35 @@ def touch_file(filename="{}.txt".format(ROLL)):
     with open(filename, "w+") as _out:
         pass
 
-def imread_c(image=""):
+def imread(image=""):
     """
     Read image
     """
-    return imread(image)
+    return cv2.imread(image)
 
 def best_image(frames, slides) -> list:
     """
     Get the ppt matches
     """
     ret = []
-    for frame in frames:
-        for slide in slides:
-            # do shiz
-            ret.append("Highest match")
+    # sift = cv2.xfeature2d.SIFT_create()
+    frs = [imread(im) for im in frames]
+    slds = [imread(im) for im in slides]
+    for idx, frame in enumerate(frames):
+        maxed  = 0
+        cslide = ""
+        for jdx, slide in enumerate(slides):
+            frm  = frs[idx]
+            slid = slds[jdx]
+
+            # keypoints, desc1 = sift.detectAndCompute(frm, )
+
+            # percent =
+            # if maxed <
+            pass
+        ret.append({
+            "percent"       : maxed,
+            "slide"         : cslide,
+            "frame"         : frame
+        })
     return ret
