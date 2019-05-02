@@ -36,11 +36,9 @@ def best_images(frames, slides) -> list:
     # sift = cv2.ORB_create()
     # sift = cv2.xfeatures2d.SIFT_create()
     # Initiate STAR detector
-    # star = cv2.FeatureDetector_create("STAR")
     star = cv2.xfeatures2d.StarDetector_create()
 
     # Initiate BRIEF extractor
-    # brief = cv2.DescriptorExtractor_create("BRIEF")
     brief = cv2.xfeatures2d.BriefDescriptorExtractor_create()
 
     ret = []
@@ -94,8 +92,12 @@ def best_images(frames, slides) -> list:
             ds2 = np.float32(ds2)
             # ds2 = ds2.astype(int)
 
-            matches = flann.knnMatch(ds1, ds2, k=2)
-            # print("matches++")
+            matches = []
+
+            try:
+                matches = flann.knnMatch(ds1, ds2, k=2)
+            except:
+                print("matches failed")
 
             good_points = []
             for x_snake in matches:
@@ -109,11 +111,11 @@ def best_images(frames, slides) -> list:
                 number_keypoints = len(kp1)
             else:
                 number_keypoints = len(kp2)
-            # print("Filenames", frame, slide)
-            # print("key 1", len(kp1))
-            # print("key 2", len(kp2))
-            # print("num good points", len(good_points))
-            # print("num keypoints", number_keypoints)
+            print("Filenames", frame, slide)
+            print("key 1", len(kp1))
+            print("key 2", len(kp2))
+            print("num good points", len(good_points))
+            print("num keypoints", number_keypoints)
 
             percent = len(good_points) / number_keypoints * 100
             # percent = 0

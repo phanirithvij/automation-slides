@@ -4,8 +4,6 @@ main file
 """
 import sys
 import os
-# import numpy as np
-# import cv2
 from config import ROLL
 from conf import USAGE_MESSAGE
 from utils import touch_file, best_images, write_file
